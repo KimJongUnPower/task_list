@@ -1,0 +1,125 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* Общее стили */
+header{
+	margin-left: calc(50% - 512px);
+	width: 1024px;
+}
+
+.width-1024px-non-background{
+	margin-left: calc(50% - 512px);
+	width: 1024px;
+}
+
+.full-black{
+	margin-top: 20px;
+	background-color: #333;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	min-height: 50px;
+}
+
+.title-p-black{
+	font-size: 30px;
+	color: #111;
+	font-style: italic;
+}
+
+.title-p-white{
+	text-align: center;
+	font-size: 40px;
+	color: #eee;
+	font-style: italic;
+}
+
+.text-align-center{
+	text-align: center;
+}
+
+.min-height-150px{
+	min-height: 150px;
+}
+
+.a-red{
+	color: #DC143C;
+	text-align: center;
+	font-size: 30px;
+	font-style: bold;
+}
+
+/* Стили для формы */
+form {
+	padding: 5px;
+	margin-left: 256px;
+	width: 512px;
+	border-style: solid;
+	border-width: medium;
+}
+
+textarea{
+	margin-left: 1px;
+	margin-bottom: 5px;
+	max-width: 510px;
+}
+
+input {
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+.error-p-red{
+	text-align: center;
+	font-style: italic;
+	color: #DC143C;
+}
+
+.two-form-in-line{
+	width: 488px;
+	float: left;
+	margin-left: 6px;
+}
+
+select{
+	min-width: 256px;
+	margin-bottom: 5px;
+}
+
+/* Стили для элементов */
+.non-style-white{
+	text-decoration: none;
+}
+
+.min-128px-item-white{
+	width: 100%;
+	min-height: 128px;
+	color: #eee;
+	padding: 10px;
+}
+
+.min-128px-item-white:hover{
+	border-style: solid;
+	border-width: medium;
+	border-color: #eee;
+}
+
+.item-title-white{
+	font-size: 30px;
+	text-align: center;
+	border-bottom-style: dotted;
+	border-color: #ccc;
+	border-width: bold;
+}
+
+.item-additionally-info-white{
+	font-size: 20px;
+	color: #eee;
+}
+
+/* Стили для отображения дополнительной информации о проекте */
+
+.project-info{
+
+}
