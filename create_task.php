@@ -82,14 +82,9 @@
 				<textarea name="description" required="true"></textarea>
 				<p>Дата выполнения: <input type="date" name="date" required="true"></p>
 				<p>Пользователь для выполнения:</p>
-				<select size="5" name="user" required="true">
-					<?php 
-						$users = R::findAll('users');
-						foreach ($users as $performing_user) {
-							echo '<option value="'.$performing_user['id'].'">'.$performing_user['login'].'</option>';
-						}
-					?>
-				</select>
+				<?php 
+					include 'includes/view_users_in_select.php';
+				?>
 				<p class="error-p-red"><?=$error?></p>
 				<?=csrf_html()?>
 				<p class="text-align-center"><input type="submit" value="Создать"></p>

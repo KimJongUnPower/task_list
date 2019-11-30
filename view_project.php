@@ -28,7 +28,7 @@
 
 		//Удаление пользователя из проекта
 		if (isset($_POST['delete_user'])){
-
+			//$user_in_project = 
 		}
 
 		if (isset($_POST['settings_project'])){
@@ -54,6 +54,9 @@
 			<div class="min-height-150px">
 				<form action="" method="POST" class="two-form-in-line">
 					<p>Добовление пользователя в проект</p>
+					<?php 
+						include 'includes/view_users_in_select.php';
+					?>
 					<p class="error-p-red"><?=$error?></p>
 					<?= csrf_html()?>
 					<input type="hidden" name="add_user" value="1">
@@ -61,6 +64,9 @@
 				</form>
 				<form action="" method="POST" class="two-form-in-line">
 					<p>Удаление пользователя из проека</p>
+					<?php 
+						include 'includes/view_users_in_select.php';
+					?>
 					<p class="error-p-red"><?=$error?></p>
 					<?= csrf_html()?>
 					<input type="hidden" name="delete_user" value="1">
