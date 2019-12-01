@@ -1,7 +1,7 @@
 <?php 
 	include_once 'core/connect_db.php';
 	include_once 'core/login.php';
-	include_once 'core/csrf_protection';
+	include_once 'core/csrf_protection.php';
 
 	$project = R::findOne('projects', 'id = ?', array($_GET['project']));
 	if (!isset($project['id']))

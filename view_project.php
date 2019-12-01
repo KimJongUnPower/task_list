@@ -2,20 +2,18 @@
 	include_once 'core/connect_db.php';
 	include_once 'core/login.php';
 	include_once 'core/csrf_protection.php';
+	include_once 'core/check_user_in_project.php';
+
+	if (!isset($_GET['id']))
+		exit('Ошибка');
 
 	$project = R::findOne('projects', 'id = ?', array($_GET['id']));
 	if (!isset($project['id']))
 		exit('Ошибка');
 
 	//Проверка в проекте ли пользователь
-	$users_check = $project->sharedUsers;
-	foreach ($users_check as $user_check) {
-		if ($user_check['id'] == $user['id']){
-			$check = 1;
-			break;
-		}
-	}
-	if (!isset($check)){
+
+	if (!check_user_in_project($project, $user)){
 		exit('Ошибка');
 	}
 
@@ -26,20 +24,12 @@
 	if ($_SERVER['REQUEST_METHOD'] == 'POST' and check_csrf()){
 		//Добовление пользователя к проекту
 		if (isset($_POST['add_user'])){
-			$user_for_project = R::findOne('users', 'id = ?', array($_POST['user']));
-			if (isset($user['id'])){
+			$user_on_project = R::findOne('users', 'id = ?', array($_POST['user']));
+			if (isset($user_on_project['id'])){
 				//Проверяем что пользователь не в проекте
-				$users_check = $project->sharedUsers;
-				foreach ($users_check as $user_check) {
-					if ($user_check['id'] == $user_for_project['id']){
-						$check = 2;
-						break;
-					}
-				}
-
-				if ($check != 2){
-					$user_for_project->sharedUsers[] = $project;
-					R::store($user_for_project);
+				if (!check_user_in_project($project, $user_on_project)){
+					$user_on_project->sharedProjects[] = $project;
+					R::store($user_on_project); 
 				} else
 					$error_add .= 'Пользователь уже в проекте';
 			} else 
@@ -48,15 +38,30 @@
 
 		//Удаление пользователя из проекта
 		if (isset($_POST['delete_user'])){
-			$user_for_project = R::findOne('users', 'id = ?', array($_POST['user']));
-			if (isset($user_for_project['id'])){
-				
+			$user_del = R::findOne('users', 'id = ?', array($_POST['user']));
+			if (isset($user_del['id'])){
+				if (check_user_in_project($project, $user_del)){
+					//Не нашёл более действиного метода чем sql запрос 
+					R::exec('DELETE FROM projects_users WHERE users_id = '.$user_del['id'].' AND projects_id = '.$project['id'].';');
+				} else {
+					$error_del .= 'Пользователь не в проекте';
+				}
 			} else 
 				$error_del .= 'Укажи корректного пользователя';
 		}
 
 		if (isset($_POST['settings_project'])){
+			if (isset($_POST['name']) and strip_tags(trim($_POST['name'])) != '' and strip_tags($_POST['name']) != $project['name']){
+				$project->name = strip_tags($_POST['name']);
+				$error_set .= 'Название изменено';
+			}
 
+			if (isset($_POST['description']) and strip_tags(trim($_POST['description'])) != '' and strip_tags($_POST['description']) != $project['description']){
+				$project->description = strip_tags($_POST['description']);
+				$error_set .= ' описание изменено';
+			}
+
+			R::store($project);
 		}
 	}	
 
@@ -88,9 +93,15 @@
 				</form>
 				<form action="" method="POST" class="two-form-in-line">
 					<p>Удаление пользователя из проека</p>
-					<?php 
-						include 'includes/view_users_in_select.php';
-					?>
+					<select name="user" required="true" size="5">
+						<?php 
+							//Выводим пользователей которые только в прокте
+							$users_in_project = $project->sharedUsers;
+							foreach ($users_in_project as $user_in_project) {
+								echo '<option value="'.$user_in_project['id'].'">'.$user_in_project['login'].'</option>';
+							}
+						?>
+					</select>
 					<p class="error-p-red"><?=$error_del?></p>
 					<?= csrf_html()?>
 					<input type="hidden" name="delete_user" value="1">
@@ -98,13 +109,10 @@
 				</form>
 			</div>
 			<div class="">
-				<form class="width-100">
-					<div class="two-columns">
-						
-					</div>
-					<div class="two-columns">
-						
-					</div>
+				<form action="" method="POST">
+					<p>Название <input type="text" name="name" value="<?=$project['name']?>"></p>
+					<p>Описание</p>
+					<textarea name="description"><?=$project['description']?></textarea>
 					<p class="error-p-red"><?=$error_set?></p>
 					<?= csrf_html(); ?>
 					<input type="hidden" name="settings_project">
@@ -152,7 +160,6 @@
 			</div>
 		</div>
 	</content>
-	//Добовление других пользователей в проект
 	//Показ заданий (Кто выполнил или кем должно быть выполнено )
 </body>
 </html>

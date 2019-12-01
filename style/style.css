@@ -77,8 +77,6 @@ header{
 	margin: 0px;
 }
 
-.two-columns{}
-
 /* Стили для формы */
 form {
 	padding: 5px;
@@ -114,10 +112,6 @@ input {
 select{
 	min-width: 100%;
 	margin-bottom: 5px;
-}
-
-.form-width-1024px{
-	width: 1024px;
 }
 
 /* Стили для элементов */

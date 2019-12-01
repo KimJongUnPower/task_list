@@ -22,12 +22,12 @@
 				R::store($new_project);
 
 				//Добовляем проект пользователю
-				$user->sharedUsers[] = $new_project;
+				$user->sharedProjects[] = $new_project;
 				R::store($user);
 
 				//Переадрисация
 				
-				header('Location: http://'.$_SERVER['HTTP_HOST'].'/view_project.php?id=?'.$project['id']);
+				header('Location: http://'.$_SERVER['HTTP_HOST'].'/view_project.php?id='.$new_project['id']);
 				exit();
 		}
 	}
