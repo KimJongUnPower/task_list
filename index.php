@@ -1,7 +1,7 @@
 <?php 
 	include 'core/connect_db.php';
 	include 'core/login.php';
-	include_once 'core/csrf_protect.php';
+	include_once 'core/csrf_protection.php';
 
 	$errors = '';
 
@@ -74,7 +74,7 @@
 
 							$tasks = $project->sharedTasks;
 							//Вывести сколько заданий всего
-							echo '<p class="additionally-info-white">Всего заданий:'.$count($tasks).'</p></div>
+							echo '<p class="additionally-info-white">Всего заданий:'.count($tasks).'</p></div>
 							</div></a>';
 						}
 					?>

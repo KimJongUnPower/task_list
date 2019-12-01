@@ -1,5 +1,5 @@
 <?php 
-	include_once 'core/csrf_protect.php';
+	include_once 'core/csrf_protection.php';
 	gen_csrf();
 
 	$errors = '';

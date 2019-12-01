@@ -4,9 +4,31 @@
 }
 
 /* Общее стили */
+
 header{
-	margin-left: calc(50% - 512px);
-	width: 1024px;
+	width: 100%;
+	height: 50px;
+	background-color: #333;
+	color: #eee;
+}
+
+.float-right{
+	float: right;
+}
+
+.float-left{
+	float: left;
+}
+
+.font-size-45px{
+	font-size: 45px;
+	color: #eee;
+}
+
+.font-size-26px{
+	font-size: 26px;
+	color: #ddd;
+	padding-top: 12px; 
 }
 
 .width-1024px-non-background{
@@ -39,8 +61,8 @@ header{
 	text-align: center;
 }
 
-.min-height-150px{
-	min-height: 150px;
+.min-height-200px{
+	min-height: 200px;
 }
 
 .a-red{
@@ -49,6 +71,13 @@ header{
 	font-size: 30px;
 	font-style: bold;
 }
+
+.width-100{
+	width: 100%;
+	margin: 0px;
+}
+
+.two-columns{}
 
 /* Стили для формы */
 form {
@@ -85,6 +114,10 @@ input {
 select{
 	min-width: 100%;
 	margin-bottom: 5px;
+}
+
+.form-width-1024px{
+	width: 1024px;
 }
 
 /* Стили для элементов */
