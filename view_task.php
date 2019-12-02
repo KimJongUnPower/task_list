@@ -54,18 +54,14 @@
 						break;
 
 					default:
-						if (isset($user_completed['id'])){
-							$task->done = True;
-							$task->end_description = strip_tags($_POST['description']);
-							R::store($task);
-						} else {
-							$error_end .= 'Такого пользователя нет';
-						}
+						$task->done = True;
+						$task->end_description = strip_tags($_POST['description']);
+						R::store($task);
 						break;
 				}
 			}
 
-			if (strip_tags(trim($_POST['description'])) != '' and strip_tags($_POST['description']) != $task['end_description']){
+			if (strip_tags(trim($_POST['description'])) != '' and strip_tags($_POST['description']) != $task['end_description'] and $task['done']){
 				$task->end_description = strip_tags($_POST['description']);
 				R::store($task);
 				$error_end .= 'Описание изменено';
