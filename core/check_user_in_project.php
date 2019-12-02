@@ -13,3 +13,14 @@
 		}
 		return False;
 	}
+
+	function check_user_in_task($task, $verified_user){
+		$users_check = $task_for_user->sharedUsers;
+
+		foreach ($users_check as $user_check) {
+			if ($user_check['id'] == $verified_user['id']){
+				return True;
+			}
+		}
+		return False;
+	}

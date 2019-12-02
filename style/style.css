@@ -31,6 +31,16 @@ header{
 	padding-top: 12px; 
 }
 
+.font-size-25px{
+	color: #111;
+	font-size: 25px;
+	padding-bottom: 5px;
+}
+
+.alert-red{
+	color: #a33141;
+}
+
 .width-1024px-non-background{
 	margin-left: calc(50% - 512px);
 	width: 1024px;

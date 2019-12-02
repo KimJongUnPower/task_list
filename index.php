@@ -55,7 +55,7 @@
 					<p>Описание проекта:</p>
 					<textarea name="description" required="true"></textarea>
 					<p class="error-p-red"><?=$errors?></p>
-					<p><input type="submit" name="Создать"></p>
+					<p><input type="submit" value="Создать"></p>
 				</form>
 			</div>
 			<div class="full-black">

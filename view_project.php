@@ -43,6 +43,7 @@
 				if (check_user_in_project($project, $user_del)){
 					//Не нашёл более действиного метода чем sql запрос 
 					R::exec('DELETE FROM projects_users WHERE users_id = '.$user_del['id'].' AND projects_id = '.$project['id'].';');
+					$project = R::findOne('projects', 'id = ?', array($project['id']));
 				} else {
 					$error_del .= 'Пользователь не в проекте';
 				}
@@ -79,7 +80,7 @@
 	?>
 	<content>
 		<div class="width-1024px-non-background">
-			<p class="title-p-black"><?=$project['name']?></p>
+			<p class="title-p-black">Проект: <?=$project['name']?></p>
 			<div class="min-height-200px">
 				<form action="" method="POST" class="two-form-in-line">
 					<p>Добовление пользователя в проект</p>
@@ -93,14 +94,9 @@
 				</form>
 				<form action="" method="POST" class="two-form-in-line">
 					<p>Удаление пользователя из проека</p>
-					<select name="user" required="true" size="5">
-						<?php 
-							//Выводим пользователей которые только в прокте
-							$users_in_project = $project->sharedUsers;
-							foreach ($users_in_project as $user_in_project) {
-								echo '<option value="'.$user_in_project['id'].'">'.$user_in_project['login'].'</option>';
-							}
-						?>
+					<?php 
+						include_once 'includes/view_users_in_project_on_select.php';
+					?>
 					</select>
 					<p class="error-p-red"><?=$error_del?></p>
 					<?= csrf_html()?>
@@ -126,9 +122,7 @@
 				<p class="title-p-white">Задания</p>
 				<div class="width-1024px-non-background">
 					<?php
-						$tasks = $project->sharedTasks;
-						
-						foreach ($tasks as $task) {
+						foreach ($project->ownTasks as $task) {
 							echo '<a class="non-style-white" href="http://'.$_SERVER['HTTP_HOST'].'/view_task.php?id='.$task['id'].'">
 							<div class="min-128px-item-white">
 								<p class="item-title-white">'.$task['name'].'</p>
@@ -146,7 +140,7 @@
 							echo '</p>
 							<p class="additionally-info-white">Пользователи: ';
 
-							$performing_users = $task->ownUsers;
+							$performing_users = $task->sharedUsers;
 							foreach ($performing_users as $performing_user) {
 								echo $performing_user['login'].' ';
 							}

@@ -46,11 +46,11 @@
 					$task->description = strip_tags($_POST['description']);
 					$task->date = strip_tags($_POST['date']);
 					$task->done = False;
-					$task->ownUsers[] = $performing_user;
+					$task->sharedUsers[] = $performing_user;
 					R::store($task);
 
-					$task->sharedTasks[] = $project;
-					R::store($task);
+					$project->ownTasks[] = $task;
+					R::store($project);
 
 					header('Location: http://'.$_SERVER['HTTP_HOST'].'/view_project.php?id='.$project['id']);
 					exit();
@@ -83,7 +83,7 @@
 				<p>Дата выполнения: <input type="date" name="date" required="true"></p>
 				<p>Пользователь для выполнения:</p>
 				<?php 
-					include 'includes/view_users_in_select.php';
+					include_once 'includes/view_users_in_project_on_select.php';
 				?>
 				<p class="error-p-red"><?=$error?></p>
 				<?=csrf_html()?>
