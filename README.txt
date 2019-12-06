@@ -11,3 +11,4 @@
 Не удобный UI.
 Необходимо создать БД sqlite3 и указать ссылку на неё в core/connect_db.php
 При создании БД сделайте таблицу users (CREATE TABLE `users` ( `id` INTEGER PRIMARY KEY AUTOINCREMENT  ,`login` TEXT,`password` TEXT);), задайте пароль пользователю в с помощью функции password_hash('password', PASSWORD_DEFAULT) и вставте эти значения в БД.
+Для работы укажите путь к index.php (Папка с проектом/www/)
