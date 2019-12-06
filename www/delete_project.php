@@ -29,6 +29,6 @@
 	}
 
 	R::trash(R::findOne('projects', 'id = ?', array($_GET['id'])));
-	header('Location: http://'.$_SERVER['HTTP_HOST'].'view_project.php?id='.$project['id']);
+	header('Location: http://'.$_SERVER['HTTP_HOST']);
 	exit();
 ?>
