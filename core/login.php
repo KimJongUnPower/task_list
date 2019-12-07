@@ -13,7 +13,7 @@
 				exit(include 'includes/login.php');
 			}
 		} else{
-			exit(include 'includes/login.php');
+			exit(include '../includes/login.php');
 		}
 	} else {
 		$user = R::findOne('users', 'id = ?', array($_SESSION['login']));

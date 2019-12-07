@@ -36,3 +36,6 @@
 
 Версия 0.07:
 	Исправлена опечатка в файле www/delete_project.php не понятное URL для переадресации
+
+Версия 0.08:
+	Исправлен путь (include '../incldues/login.php') в core/login.php
