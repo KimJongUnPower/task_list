@@ -70,9 +70,8 @@
 								<div class="project-info">
 									<p class="item-additionally-info-white">'.$project['description'].'</p>';
 
-							$tasks = $project->sharedTasks;
 							//Вывести сколько заданий всего
-							echo '<p class="additionally-info-white">Всего заданий:'.count($tasks).'</p></div>
+							echo '<p class="additionally-info-white">Всего заданий:'.count($project->ownTasks).'</p></div>
 							</div></a>';
 						}
 					?>
